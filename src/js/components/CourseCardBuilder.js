@@ -99,7 +99,7 @@ export class CourseCardBuilder extends Component {
     render() {
         return (
             <div onload={() => this.updateExtract()} style="font-family: Helvetica, 'sans-serif'; background-color: #e8ffef; background-blend-mode: lighten; padding: 10px; margin: 10px; width: 60%; min-width: 715px; display: block; margin-left: auto; margin-right: auto; box-shadow: 10px 10px 8px grey;">
-                <h1?Course Card Builder</h1>
+                <h1>Course Card Builder</h1>
                 <h3>Course URL</h3>
                 <input type="text" name="URL" onChange={() => this.URL_Entered()}/>
                 <h3>Style</h3>
