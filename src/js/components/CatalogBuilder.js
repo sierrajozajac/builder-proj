@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { checkPropTypes } from 'prop-types';
 
-
-// Catalog Builder
 class CatalogBuilder extends Component {
     constructor(props) {
         super(props);
@@ -91,14 +89,12 @@ class CatalogBuilder extends Component {
         this.updateCatalogExtract();
     }
     updateCatalogExtract() {
-        var extract = document.getElementById("extract");
         var text = `&lt;iFrame src='http://127.0.0.1:3006/?darkmode=${this.state.mode}&direction=${this.state.style}&courseID=${this.state.URL}' height='${this.state.height}' width='${this.state.width}'  sandbox='allow-scripts allow-top-navigation'/&gt;`;
-            
-        extract.innerHTML = text;
+        document.getElementById("extract").innerHTML = text;
     }
     render() {
         return (
-            <div onLoad={() => this.updateCatalogExtract()} style="font-family: Helvetica, 'sans-serif'; background-color: #e8ffef; background-blend-mode: lighten; padding: 10px; margin: 10px; width: 60%; min-width: 715px; display: block; margin-left: auto; margin-right: auto; box-shadow: 10px 10px 8px grey;">
+            <div onLoad={() => this.updateCatalogExtract()}>
                 <h1>Catalog Builder</h1>
                 <h3>URL</h3>
                 <input type="text" name="URL" onChange={() => this.URL_Entered()}/>
@@ -112,7 +108,7 @@ class CatalogBuilder extends Component {
                 <label>Light</label>
                 <input type="radio" value="dark" id="darkRad" onChange={() => this.darkModeRadioClick()}/>
                 <h3>Copy the text below into your page. ...</h3>
-                <textarea id="extract" style="width: 95%">&lt;iFrame src='http://127.0.0.1:3000/?darkmode=true&direction=row&courseID=' height='500px' width='910px'  sandbox='allow-scripts allow-top-navigation'/&gt;</textarea>
+                <textarea id="extract">&lt;iFrame src='http://127.0.0.1:3000/?darkmode=true&direction=row&courseID=' height='500px' width='910px'  sandbox='allow-scripts allow-top-navigation'/&gt;</textarea>
             </div>        
         );
     }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { checkPropTypes } from 'prop-types';
 
-// Course Card Builder
-export class CourseCardBuilder extends Component {
+class CourseCardBuilder extends Component {
     constructor(props) {
         super(props);
 
@@ -91,14 +90,12 @@ export class CourseCardBuilder extends Component {
         this.updateCardExtract();
     }
     updateCardExtract() {
-        var extract = document.getElementById("extract");
         var text = `&lt;iframe src = 'http://127.0.0.1:3006/build/index.html?darkmode=${this.state.mode}&direction=${this.state.style}&courseID=${this.state.URL}' height='${this.state.height}' width='${this.state.width}' style='${this.state.styling}' &gt; &lt;/iframe&gt`;
-            
-        extract.innerHTML = text;
+        document.getElementById("extract").innerHTML = text;
     }
     render() {
         return (
-            <div onload={() => this.updateExtract()} style="font-family: Helvetica, 'sans-serif'; background-color: #e8ffef; background-blend-mode: lighten; padding: 10px; margin: 10px; width: 60%; min-width: 715px; display: block; margin-left: auto; margin-right: auto; box-shadow: 10px 10px 8px grey;">
+            <div onload={() => this.updateExtract()}>
                 <h1>Course Card Builder</h1>
                 <h3>Course URL</h3>
                 <input type="text" name="URL" onChange={() => this.URL_Entered()}/>
@@ -113,7 +110,7 @@ export class CourseCardBuilder extends Component {
                 <input type="radio" value="dark" id="darkRad" onChange={() => this.darkModeRadioClick()}/>
                 <label>Dark</label>
                 <h3>Copy the text below into your page. ...</h3>
-                <Extract name="&lt;iFrame src='http://127.0.0.1:3006/build/index.html?darkmode=false&direction=row&courseID=' height='180px' width='100%' style='border-style: ridge'/&gt;"/>
+                <textarea id="extract">&lt;iFrame src='http://127.0.0.1:3006/build/index.html?darkmode=false&direction=row&courseID=' height='180px' width='100%' style='border-style: ridge'/&gt;</textarea>
             </div>
         );
     }

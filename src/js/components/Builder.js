@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { checkPropTypes } from 'prop-types';
 
-// Builder
 class Builder extends Component {
     builderSelected() {
         var selection = document.getElementById("builders").value;
