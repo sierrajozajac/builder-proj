@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from "react-dom";
 import { checkPropTypes } from 'prop-types';
 
 class CatalogBuilder extends Component {
@@ -11,7 +12,7 @@ class CatalogBuilder extends Component {
             mode: "true",
             height: "180px",
             width: "100%",
-            extract: "<iframe src='http://127.0.0.1:3000/?darkmode=true&direction=row&courseID=' height='500px' width='910px'  sandbox='allow-scripts allow-top-navigation'></iframe>;"
+            extract: "<iframe src='http://127.0.0.1:3000/?darkmode=true&direction=row&courseID='' height='500px' width='910px'  sandbox='allow-scripts allow-top-navigation'></iframe>;"
         };
         
         this.URL_Entered = this.URL_Entered.bind(this);
@@ -71,7 +72,7 @@ class CatalogBuilder extends Component {
         this.updateCatalogExtract();
     }
     updateCatalogExtract() {
-        var text = `<iframe src='http://127.0.0.1:3006/?darkmode=${this.state.mode}&direction=${this.state.style}&courseID=${this.state.URL}' height='${this.state.height}' width='${this.state.width}'  sandbox='allow-scripts allow-top-navigation'></iframe>;`;
+        var text = `<iframe src='http://127.0.0.1:3006/?darkmode=${this.state.mode}&direction=${this.state.style}&courseID='${this.state.URL}' height='${this.state.height}' width='${this.state.width}'  sandbox='allow-scripts allow-top-navigation'></iframe>;`;
         this.setState({extract: text});
     }
     userUpdatesExtract() {
@@ -80,8 +81,8 @@ class CatalogBuilder extends Component {
     }
     render() {
         return (
-            <div onLoad={() => this.updateCatalogExtract()}>
-                <h1>Catalog Builder</h1>
+            <div style={{background: "#960207", padding: "5px", font: "400 15px/1.8 Lato, sans-serif", color: "white"}}>
+                <h2 style={{color: "black", "text-decoration": "underline"}}>Catalog Builder</h2>
                 <h3>URL</h3>
                 <input type="text" name="URL" onChange={() => this.URL_Entered()}/>
                 <h3>Style</h3>
@@ -93,8 +94,9 @@ class CatalogBuilder extends Component {
                 <input type="radio" value="light" id="lightRad" onChange={() => this.lightModeRadioClick()}/>
                 <label>Light</label>
                 <input type="radio" value="dark" id="darkRad" onChange={() => this.darkModeRadioClick()}/>
+                <label>Dark</label>
                 <h3>Copy the text below into your page. ...</h3>
-                <textarea id="extract" value={this.state.extract} onChange={() => this.userUpdatesExtract()}></textarea>
+                <textarea id="extract" value={this.state.extract} onChange={() => this.userUpdatesExtract()} style={{width: "95%"}}></textarea>
             </div>        
         );
     }
