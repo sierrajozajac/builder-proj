@@ -9,16 +9,18 @@ class CourseCardBuilder extends Component {
             URL: "",
             style: "row",
             mode: "false",
-            height: "180px",
+            height: "250px",
             width: "100%",
-            styling: "border-style: ridge"
+            styling: "border-radius:20px",
+            extract: "<iframe src='http://127.0.0.1:3006/build/index.html?darkmode=false&direction=row&courseID='' height='180px' width='100%' style='border-style: ridge'></iframe>;"
         };
 
         this.URL_Entered = this.URL_Entered.bind(this);
         this.rowStyleRadioClick = this.rowStyleRadioClick.bind(this);
         this.colStyleRadioClick = this.colStyleRadioClick.bind(this);
         this.lightModeRadioClick = this.lightModeRadioClick.bind(this);
-        this.darkModeRadioClick = this.darkModeRadioClick.bind(this);   
+        this.darkModeRadioClick = this.darkModeRadioClick.bind(this);  
+        this.userUpdatesExtract = this.userUpdatesExtract.bind(this);
     }
     URL_Entered() {
         var val = encodeURIComponent(document.getElementById("text").value);
@@ -29,69 +31,53 @@ class CourseCardBuilder extends Component {
         var rowRad = document.getElementById("rowRad");
         var colRad = document.getElementById("colRad");
 
-        if (rowRad.checked == true) {
-            colRad.checked = false;
-            this.setState({style: "row"});
-            this.setState({height: "500px"});
-            this.setState({width: "910px"});
-        }
-        else {
-            colRad.checked = true;
-            this.setState({style: "column"});
-            this.setState({height: "490px"});
-            this.setState({width: "910px"});
-        }
+        rowRad.checked = true;
+        colRad.checked = false;
+        this.setState({style: "row"});
+        this.setState({height: "250px"});
+        this.setState({width: "100%"});
+        
         this.updateCardExtract();    
     }
     colStyleRadioClick() {
         var rowRad = document.getElementById("rowRad");
         var colRad = document.getElementById("colRad");
         
-        if (colRad.checked == true) {
-            rowRad.checked = false;
-            this.setState({style: "column"});
-            this.setState({height: "490px"});
-            this.setState({width: "910px"});
-        }
-        else {
-            rowRad.checked = true;
-            this.setState({style: "row"});
-            this.setState({height: "500px"});
-            this.setState({width: "910px"});
-        }
+        colRad.checked = true;
+        rowRad.checked = false;
+        this.setState({style: "column"});
+        this.setState({height: "255px"});
+        this.setState({width: "210px"});
+        
         this.updateCardExtract();
     }
     lightModeRadioClick() {
         var lightRad = document.getElementById("lightRad");
         var darkRad = document.getElementById("darkRad");
         
-        if (lightRad.checked == true) {
-            darkRad.checked = false;
-            this.setState({mode: "false"});
-        }
-        else {
-            darkRad.checked = true;
-            this.setState({mode: "true"});
-        }
+        lightRad.checked = true;
+        darkRad.checked = false;
+        this.setState({mode: "false"});
+        
         this.updateCardExtract();
     }
     darkModeRadioClick() {
         var lightRad = document.getElementById("lightRad");
         var darkRad = document.getElementById("darkRad");
         
-        if (darkRad.checked == true) {
-            lightRad.checked = false;
-            this.setState({mode: "true"});
-        }
-        else {
-            lightRad.checked = true;
-            this.setState({mode: "false"});
-        }
+        darkRad.checked = true;
+        lightRad.checked = false;
+        this.setState({mode: "true"});
+         
         this.updateCardExtract();
     }
     updateCardExtract() {
-        var text = `&lt;iframe src = 'http://127.0.0.1:3006/build/index.html?darkmode=${this.state.mode}&direction=${this.state.style}&courseID=${this.state.URL}' height='${this.state.height}' width='${this.state.width}' style='${this.state.styling}' &gt; &lt;/iframe&gt`;
-        document.getElementById("extract").innerHTML = text;
+        var text = `<iframe src = 'http://127.0.0.1:3006/build/index.html?darkmode=${this.state.mode}&direction=${this.state.style}&courseID=${this.state.URL}' height='${this.state.height}' width='${this.state.width}' style='${this.state.styling}'></iframe>;`;
+        this.setState({extract: text});
+    }
+    userUpdatesExtract() {
+        var text = document.getElementById("extract").value;
+        this.setState({extract: text});
     }
     render() {
         return (
@@ -110,7 +96,7 @@ class CourseCardBuilder extends Component {
                 <input type="radio" value="dark" id="darkRad" onChange={() => this.darkModeRadioClick()}/>
                 <label>Dark</label>
                 <h3>Copy the text below into your page. ...</h3>
-                <textarea id="extract">&lt;iFrame src='http://127.0.0.1:3006/build/index.html?darkmode=false&direction=row&courseID=' height='180px' width='100%' style='border-style: ridge'/&gt;</textarea>
+                <textarea id="extract" value={this.state.extract} onChange={() => this.userUpdatesExtract()}></textarea>
             </div>
         );
     }
