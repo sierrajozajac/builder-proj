@@ -24,7 +24,7 @@ class CourseCardBuilder extends Component {
         this.userUpdatesExtract = this.userUpdatesExtract.bind(this);
     }
     URL_Entered() {
-        var val = encodeURIComponent(document.getElementById("text").value);
+        var val = encodeURIComponent(document.getElementById("URL").value);
         this.setState({URL: val});
         this.updateCardExtract();
     }
@@ -85,7 +85,7 @@ class CourseCardBuilder extends Component {
             <div style={{background: "#960207", padding: "5px", font: "400 15px/1.8 Lato, sans-serif", color: "white"}}>
                 <h2 style={{color: "black", "text-decoration": "underline"}}>Course Card Builder</h2>
                 <h3>Course URL</h3>
-                <input type="text" name="URL" onChange={() => this.URL_Entered()}/>
+                <input type="text" name="URL" id="URL" onChange={() => this.URL_Entered()}/>
                 <h3>Style</h3>
                 <input type="radio" value="row" id="rowRad" onChange={() => this.rowStyleRadioClick()}/>
                 <label>Row</label>
